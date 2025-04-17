@@ -16,15 +16,15 @@ export default function AssignmentRoutes(app) {
   // delete an assignment
   app.delete("/api/assignments/:assignmentId", async (req, res) => {
     const { assignmentId } = req.params;
-    console.log("Deleting  ${assignmentId}");
+    console.log("Deleting  Assignment with ID:", assignmentId);
     const status = await assignmentsDao.deleteAssignment(assignmentId);
     res.send(status);
   });
 
-  // get all assignments
-  app.get("/api/assignments/:assignmentId", (req, res) => {
+  // get assignment
+  app.get("/api/assignments/:assignmentId", async (req, res) => {
     const { assignmentId } = req.params;
-    const assignment = assignmentsDao.findAssignment(assignmentId);
+    const assignment = await assignmentsDao.findAssignment(assignmentId);
     res.json(assignment);
   });
 }
